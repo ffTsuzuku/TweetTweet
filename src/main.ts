@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Tweet from './Tweet'
 import Extractor from './Extract'
+import SocialNetwork from './SocialNetwork'
 
 import { Temporal, Intl, toTemporalInstant } from '@js-temporal/polyfill'
 Date.prototype.toTemporalInstant = toTemporalInstant
@@ -43,8 +44,24 @@ class Main {
         }
 
         console.log(`Fetched ${tweets.length} tweets`)
+
         const span = Extractor.getTimespan(tweets)
-        console.log(`ranging from ${span.start} to ${span.end}`)
+        console.log(`Ranging from ${span.start} to ${span.end}`)
+
+        const mentionedUsers: Set<string> = Extractor.getMentionedUsers(tweets)
+        console.log(`Covers ${mentionedUsers.size} Twitter users`)
+
+        const followsGraph = SocialNetwork.guessFollowsGraph(tweets)
+        console.log(`Follows graph has ${followsGraph.size} nodes`)
+
+        const count = 10
+        const influencers = SocialNetwork.influencers(followsGraph)
+        for (const username of influencers.slice(
+            0,
+            Math.min(count, influencers.length)
+        )) {
+            console.log(username)
+        }
     }
 }
 

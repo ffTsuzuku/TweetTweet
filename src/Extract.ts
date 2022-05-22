@@ -31,7 +31,7 @@ export default class Extractor {
      */
     static getMentionedUsers(
         tweets: TweetInterface[]
-    ): TweetInterface['author'] {
+    ): Set<TweetInterface['author']> {
         throw Error('Implement me!')
     }
 }

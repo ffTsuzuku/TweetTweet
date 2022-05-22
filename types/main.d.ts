@@ -45,7 +45,7 @@ declare interface TimespanInterface {
     hashCode(): number
 }
 
-interface Date {
+declare interface Date {
     toTemporalInstant(date: Date): Instant
 }
 
