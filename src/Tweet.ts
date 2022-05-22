@@ -1,3 +1,4 @@
+import { Temporal } from '@js-temporal/polyfill'
 export default class Tweet implements TweetInterface {
     readonly id
     readonly author
@@ -8,11 +9,14 @@ export default class Tweet implements TweetInterface {
         this.id = id
         this.author = author
         this.text = text
-        this.timestamp = new Date(timestamp)
+        this.timestamp = Temporal.Instant.from(
+            new Date(timestamp).toISOString()
+        )
     }
 
     public toString(): string {
-        return `(${this.id} ${this.timestamp.toISOString} ${this.author} ${this.text})`
+        const dateTime = this.timestamp.toString()
+        return `(${this.id} ${dateTime} ${this.author} ${this.text})`
     }
 
     public equals(tweet: TweetInterface): boolean {

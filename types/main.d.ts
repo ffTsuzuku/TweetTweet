@@ -12,7 +12,7 @@ declare interface TweetInterface {
     readonly id: number
     readonly author: string
     readonly text: string
-    readonly timestamp: Date
+    readonly timestamp: Instant
 
     get id(): number
     get author(): string

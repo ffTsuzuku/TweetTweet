@@ -23,6 +23,7 @@ class Main {
 
     public static async main(args: String[]): Promise<void> {
         const tweets: Tweet[] = []
+        // this logic replaces the entire TweetReader class to reduce bloat.
         try {
             const response = await axios(this.tweetAPI)
             const responseJSON = response.data as apiResponse[]
@@ -43,6 +44,7 @@ class Main {
             console.error(e)
         }
 
+        console.log('Tweet example', tweets[0].toString())
         console.log(`Fetched ${tweets.length} tweets`)
 
         const span = Extractor.getTimespan(tweets)
