@@ -1,5 +1,9 @@
 import axios from 'axios'
-import { Tweet } from './Tweet'
+import Tweet from './Tweet'
+import Extractor from './Extract'
+
+import { Temporal, Intl, toTemporalInstant } from '@js-temporal/polyfill'
+Date.prototype.toTemporalInstant = toTemporalInstant
 
 interface apiResponse {
     created_at: string
@@ -38,7 +42,9 @@ class Main {
             console.error(e)
         }
 
-        console.log('Tweet', tweets, 'total', tweets.length)
+        console.log(`Fetched ${tweets.length} tweets`)
+        const span = Extractor.getTimespan(tweets)
+        console.log(`ranging from ${span.start} to ${span.end}`)
     }
 }
 

@@ -1,4 +1,4 @@
-export class Tweet implements TweetData {
+export default class Tweet implements TweetInterface {
     readonly id
     readonly author
     readonly text
@@ -15,7 +15,7 @@ export class Tweet implements TweetData {
         return `(${this.id} ${this.timestamp.toISOString} ${this.author} ${this.text})`
     }
 
-    public equals(tweet: TweetData): boolean {
+    public equals(tweet: TweetInterface): boolean {
         return this.id === tweet.id
     }
 
