@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1653273489832" clover="3.2.0">
-  <project timestamp="1653273489832" name="All files">
-    <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1" elements="3" coveredelements="3" complexity="0" loc="2" ncloc="2" packages="1" files="1" classes="1"/>
-    <file name="example.ts" path="/home/tsuzuku/Git/TweetTweet/src/example.ts">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+<coverage generated="1653283789798" clover="3.2.0">
+  <project timestamp="1653283789799" name="All files">
+    <metrics statements="16" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="3" elements="22" coveredelements="12" complexity="0" loc="16" ncloc="16" packages="1" files="2" classes="2"/>
+    <file name="Extract.ts" path="/home/tsuzuku/Git/TweetTweet/src/Extract.ts">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="36" count="1" type="stmt"/>
+    </file>
+    <file name="Tweet.ts" path="/home/tsuzuku/Git/TweetTweet/src/Tweet.ts">
+      <metrics statements="13" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
+      <line num="9" count="2" type="stmt"/>
+      <line num="10" count="2" type="stmt"/>
+      <line num="11" count="2" type="stmt"/>
+      <line num="12" count="2" type="stmt"/>
+      <line num="18" count="0" type="stmt"/>
+      <line num="19" count="0" type="stmt"/>
+      <line num="23" count="0" type="stmt"/>
+      <line num="27" count="0" type="stmt"/>
+      <line num="28" count="0" type="stmt"/>
+      <line num="29" count="0" type="stmt"/>
+      <line num="30" count="0" type="stmt"/>
     </file>
   </project>
 </coverage>

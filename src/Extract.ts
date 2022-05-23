@@ -1,3 +1,4 @@
+import Timespan from './Timespan'
 /**
  * Extract consists of methods that extract information from a list of tweets.
  *
@@ -12,7 +13,7 @@ export default class Extractor {
      * @return: a minimum-length time interval that contains the timestamp of
      * every tweet in the list.
      */
-    static getTimespan(tweets: TweetInterface[]): TimespanInterface {
+    static getTimespan(tweets: TweetInterface[]): Timespan {
         throw Error('Implement me!')
     }
 
