@@ -9,9 +9,19 @@ export default class Tweet implements TweetInterface {
         this.id = id
         this.author = author
         this.text = text
-        this.timestamp = Temporal.Instant.from(
-            new Date(timestamp).toISOString()
-        )
+
+        const [_, month, day, time, offset, year] = timestamp.split(' ')
+        const [hour, minute, second] = time.split(':')
+
+        this.timestamp = Temporal.ZonedDateTime.from({
+            year: Number(year),
+            day: Number(day),
+            month: Number(month),
+            hour: Number(hour),
+            minute: Number(minute),
+            second: Number(second),
+            timeZone: offset,
+        }).toInstant()
     }
 
     public toString(): string {
