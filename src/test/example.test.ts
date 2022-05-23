@@ -11,15 +11,10 @@ const tweet1 = new Tweet(
     1,
     'alyssa',
     'is it reasonable to talk about rivest so much?',
-    d1.toString()
+    d1
 )
 
-const tweet2 = new Tweet(
-    2,
-    'bbitdiddle',
-    'rivest talk in 30 minutes #hype',
-    d2.toString()
-)
+const tweet2 = new Tweet(2, 'bbitdiddle', 'rivest talk in 30 minutes #hype', d2)
 
 test('getTimespanTwoTweets', () => {
     const timespan = Extractor.getTimespan([tweet1, tweet2])

@@ -35,7 +35,19 @@ class Main {
                     created_at: timestamp,
                 } = tweet
 
-                return new Tweet(id, text, author, timestamp)
+                const [_, month, day, time, offset, year] = timestamp.split(' ')
+                const [hour, minute, second] = time.split(':')
+
+                const instant = Temporal.ZonedDateTime.from({
+                    year: Number(year),
+                    day: Number(day),
+                    month: Number(month),
+                    hour: Number(hour),
+                    minute: Number(minute),
+                    second: Number(second),
+                    timeZone: offset,
+                }).toInstant()
+                return new Tweet(id, text, author, instant)
             })
             for (const tweet of data) {
                 tweets.push(tweet)

@@ -5,23 +5,16 @@ export default class Tweet implements TweetInterface {
     readonly text
     readonly timestamp
 
-    constructor(id: number, author: string, text: string, timestamp: string) {
+    constructor(
+        id: number,
+        author: string,
+        text: string,
+        timestamp: Temporal.Instant
+    ) {
         this.id = id
         this.author = author
         this.text = text
-
-        const [_, month, day, time, offset, year] = timestamp.split(' ')
-        const [hour, minute, second] = time.split(':')
-
-        this.timestamp = Temporal.ZonedDateTime.from({
-            year: Number(year),
-            day: Number(day),
-            month: Number(month),
-            hour: Number(hour),
-            minute: Number(minute),
-            second: Number(second),
-            timeZone: offset,
-        }).toInstant()
+        this.timestamp = timestamp
     }
 
     public toString(): string {
