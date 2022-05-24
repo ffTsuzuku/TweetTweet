@@ -1,3 +1,5 @@
+import Timespan from './Timespan'
+import Tweet from './Tweet'
 /**
  * Filter consists of methods that filter a list of tweets for those matching a
  * condition.
@@ -31,8 +33,12 @@ export default class Filter {
      */
     static inTimespan(
         tweets: TweetInterface[],
-        timespan: TimespanInterface
+        timespan: Timespan
     ): TweetInterface[] {
+        throw Error('Implement me!')
+    }
+
+    static containing(tweets: Tweet[], words: string[]): TweetInterface[] {
         throw Error('Implement me!')
     }
 }
