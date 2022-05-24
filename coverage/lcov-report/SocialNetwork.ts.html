@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for Extract.ts</title>
+    <title>Code coverage report for SocialNetwork.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> Extract.ts</h1>
+        <h1><a href="index.html">All files</a> SocialNetwork.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -101,15 +101,10 @@
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -118,10 +113,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -139,42 +130,54 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Timespan from './Timespan'
-/**
- * Extract consists of methods that extract information from a list of tweets.
- *
- * DO NOT change the method signatures and specifications of these methods, but
- * you should implement their method bodies, and you may add new public or
- * private methods or classes if you like.
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * SocialNetwork provides methods that operate on a social network.
+ * A social network is represented by a Map, where map[A] is the set of people
+ * that person A follows on Twitter, and all people are represented by their
+ * Twitter usernames. Users can't follow themselves. If A doesn't follow anybody
+ * then map[A] may be an empty set, or A might not even exist as a key in the map;
+ * this is true even if A is followed by other people in the network. Twitter
+ * usernames are not case sensitive. A username should appear at most once as a
+ * key in the map or in any given map[A] set.
  */
-export default class Extractor {
+export default class SocialNetwork {
     /**
-     * Get the time period spanned by tweets.
-     * @param tweets : List of tweets with distinct ids.
-     * @return: a minimum-length time interval that contains the timestamp of
-     * every tweet in the list.
+     * Guess who might follow whom, from evidence found in tweets
+     * @param tweets: A list of tweets not modified by this method.
+     * @return a social network (defined above) in which Ernie follows Bert if
+     * and only if there is evidence for it in the given list of tweets. One
+     * kind of evidence that Ernie follows bert is if Ernie @-mentions  Bert
+     * in a tweet. This must be implemented. Other kinds of evidence may be used
+     * at the implementors discretion.
+     * All the Twitter usernames in the returned social network must be either
+     * authors or @-mentions in the list of tweets.
      */
-    static getTimespan(tweets: TweetInterface[]): Timespan {
-        throw Error('Implement me!')
+    static guessFollowsGraph(
+        tweets: TweetInterface[]
+    ): Map&lt;string, Set&lt;string&gt;&gt; {
+        throw Error('Implement me')
     }
 &nbsp;
     /**
-     * Get usernames mentioned in a list of tweets.
-     * @param tweets: list of tweets with distinct ids.
-     * @return : The set of usernames who are mentioned in the text of tweets.
-     * A username-mention is "@" followed by a Twitter username
-     * (as defined by Tweet.getAuthor()'s spec)
-     * The username-mention cannot be immediately preceded or followed by any
-     * character valid in a Twitter username.
-     * For this reason an email address like bitdiddle@mit.edu does NOT
-     * contain a mention of the username mit.
-     * Twitter usernames are case-insensitive, and the returned set may include
-     * a username as most once.
+     * Find the people in a social network who have the greatest influence, in
+     * the sense that they have the most followers.
+     * @param followsGraph a social network (as defined above)
+     * @return a list of all distinct Twitter usernames in followsGraph, in
+     * descending order of follower count.
      */
-    static getMentionedUsers(
-        tweets: TweetInterface[]
-    ): Set&lt;TweetInterface['author']&gt; {
-        throw Error('Implement me!')
+    static influencers(followsGraph: Map&lt;string, Set&lt;string&gt;&gt;): string[] {
+        throw Error('Implement me')
     }
 }
 &nbsp;</pre></td></tr></table></pre>

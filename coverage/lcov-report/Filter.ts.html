@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for Extract.ts</title>
+    <title>Code coverage report for Filter.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> Extract.ts</h1>
+        <h1><a href="index.html">All files</a> Filter.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -101,7 +101,15 @@
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -117,6 +125,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,8 +144,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -140,40 +152,46 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Timespan from './Timespan'
+import Tweet from './Tweet'
 /**
- * Extract consists of methods that extract information from a list of tweets.
+ * Filter consists of methods that filter a list of tweets for those matching a
+ * condition.
  *
  * DO NOT change the method signatures and specifications of these methods, but
  * you should implement their method bodies, and you may add new public or
  * private methods or classes if you like.
  */
-export default class Extractor {
+export default class Filter {
     /**
-     * Get the time period spanned by tweets.
-     * @param tweets : List of tweets with distinct ids.
-     * @return: a minimum-length time interval that contains the timestamp of
-     * every tweet in the list.
+     * Find tweets written by a particular user.
+     * @param tweets a list of tweets with distinct ids, not modified by this method.
+     * @param username Twitter username, required to be a valid Twitter username as
+     * defined by Tweet.getAuthor()'s spec.
+     * @return all and only the tweets in the list whose author is username,
+     * in the same order as in the input list.
      */
-    static getTimespan(tweets: TweetInterface[]): Timespan {
+    static writtenBy(
+        tweets: TweetInterface[],
+        username: string
+    ): TweetInterface[] {
         throw Error('Implement me!')
     }
 &nbsp;
     /**
-     * Get usernames mentioned in a list of tweets.
-     * @param tweets: list of tweets with distinct ids.
-     * @return : The set of usernames who are mentioned in the text of tweets.
-     * A username-mention is "@" followed by a Twitter username
-     * (as defined by Tweet.getAuthor()'s spec)
-     * The username-mention cannot be immediately preceded or followed by any
-     * character valid in a Twitter username.
-     * For this reason an email address like bitdiddle@mit.edu does NOT
-     * contain a mention of the username mit.
-     * Twitter usernames are case-insensitive, and the returned set may include
-     * a username as most once.
+     * Find tweets that were sent during a particular timespan.
+     * @param tweets a list of tweets with distinct ids, not modified by this method.
+     * @param timespan timespan
+     * @return all and only the tweets in the list that were sent during the timespan,
+     * in the same order as in the input list.
      */
-    static getMentionedUsers(
-        tweets: TweetInterface[]
-    ): Set&lt;TweetInterface['author']&gt; {
+    static inTimespan(
+        tweets: TweetInterface[],
+        timespan: Timespan
+    ): TweetInterface[] {
+        throw Error('Implement me!')
+    }
+&nbsp;
+    static containing(tweets: Tweet[], words: string[]): TweetInterface[] {
         throw Error('Implement me!')
     }
 }
