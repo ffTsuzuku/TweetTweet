@@ -1,4 +1,6 @@
 import Timespan from './Timespan'
+import Tweet from './Tweet'
+import { Temporal } from '@js-temporal/polyfill'
 /**
  * Extract consists of methods that extract information from a list of tweets.
  *
@@ -13,7 +15,7 @@ export default class Extractor {
      * @return: a minimum-length time interval that contains the timestamp of
      * every tweet in the list.
      */
-    static getTimespan(tweets: TweetInterface[]): Timespan {
+    static getTimespan(tweets: Tweet[]): Timespan {
         throw Error('Implement me!')
     }
 
@@ -30,9 +32,7 @@ export default class Extractor {
      * Twitter usernames are case-insensitive, and the returned set may include
      * a username as most once.
      */
-    static getMentionedUsers(
-        tweets: TweetInterface[]
-    ): Set<TweetInterface['author']> {
+    static getMentionedUsers(tweets: Tweet[]): Set<Tweet['author']> {
         throw Error('Implement me!')
     }
 }
