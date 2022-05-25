@@ -16,7 +16,21 @@ export default class Extractor {
      * every tweet in the list.
      */
     static getTimespan(tweets: Tweet[]): Timespan {
-        throw Error('Implement me!')
+        if (!!!tweets.length) throw Error('Empty')
+
+        let start = tweets[0].timestamp
+        let end = tweets[0].timestamp
+
+        for (const tweet of tweets) {
+            if (start.since(tweet.timestamp).seconds > 0) {
+                start = tweet.timestamp
+            }
+            if (end.until(tweet.timestamp).seconds > 0) {
+                end = tweet.timestamp
+            }
+        }
+
+        return new Timespan(start, end)
     }
 
     /**
