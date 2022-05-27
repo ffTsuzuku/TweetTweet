@@ -47,6 +47,65 @@ export default class Extractor {
      * a username as most once.
      */
     static getMentionedUsers(tweets: Tweet[]): Set<Tweet['author']> {
-        throw Error('Implement me!')
+        const lowerAlphabetRange = { start: 97, end: 122 }
+        const upperAlphabetRange = { start: 65, end: 90 }
+        const numericRange = { start: 48, end: 57 }
+        const specialChars = [45, 95]
+
+        const atChar = '@'.charCodeAt(0)
+        const spaceChar = ' '.charCodeAt(0)
+        const users = new Set<string>()
+
+        const validHandleChar = (charCode: number): boolean => {
+            let valid = false
+            if (
+                charCode >= lowerAlphabetRange.start &&
+                charCode <= lowerAlphabetRange.end
+            ) {
+                valid = true
+            } else if (
+                charCode >= upperAlphabetRange.start &&
+                charCode <= upperAlphabetRange.end
+            ) {
+                valid = true
+            } else if (
+                charCode >= numericRange.start &&
+                charCode <= numericRange.end
+            ) {
+                valid = true
+            } else if (specialChars.indexOf(charCode) !== -1) {
+                valid = true
+            }
+
+            return valid
+        }
+
+        for (const tweet of tweets) {
+            const { text } = tweet
+
+            let atIndex = -1
+            for (let i = 0; i < text.length; i++) {
+                const prevChar = text.charCodeAt(i - 1)
+                const char = text.charCodeAt(i)
+
+                if (char === atChar && (prevChar === spaceChar || i - 1 < 0)) {
+                    atIndex = i
+                } else if (char === spaceChar && atIndex !== -1) {
+                    users.add(text.substring(atIndex, i))
+                    atIndex = -1
+                } else if (
+                    validHandleChar(char) &&
+                    i === text.length - 1 &&
+                    atIndex !== -1
+                ) {
+                    users.add(text.substring(atIndex, i + 1))
+                    atIndex = -1
+                } else if (!validHandleChar(char) && atIndex) {
+                    atIndex = -1
+                }
+            }
+        }
+
+        return users
     }
 }
