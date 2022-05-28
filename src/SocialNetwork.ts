@@ -1,3 +1,4 @@
+import Tweet from "./Tweet"
 /**
  * SocialNetwork provides methods that operate on a social network.
  * A social network is represented by a Map, where map[A] is the set of people
@@ -21,7 +22,7 @@ export default class SocialNetwork {
      * authors or @-mentions in the list of tweets.
      */
     static guessFollowsGraph(
-        tweets: TweetInterface[]
+        tweets: Tweet[]
     ): Map<string, Set<string>> {
         throw Error('Implement me')
     }
