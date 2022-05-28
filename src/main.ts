@@ -32,7 +32,7 @@ class Main {
                     id,
                     text,
                     'user.screen_name': author,
-                    created_at: timestamp,
+                    created_at: timestamp
                 } = tweet
 
                 const [_, month, day, time, offset, year] = timestamp.split(' ')
@@ -45,7 +45,7 @@ class Main {
                     hour: Number(hour),
                     minute: Number(minute),
                     second: Number(second),
-                    timeZone: offset,
+                    timeZone: offset
                 }).toInstant()
                 return new Tweet(id, text, author, instant)
             })
