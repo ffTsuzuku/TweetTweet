@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
+    "type": "module",
     "scripts": {
         "dev": "ts-node src/main.ts",
         "test": "jest --coverage",
@@ -11,6 +12,7 @@
     "keywords": [],
     "author": "",
     "license": "ISC",
+    "prettier": "@ffTsuzuku/prettier-config",
     "dependencies": {
         "@js-temporal/polyfill": "^0.4.1",
         "@types/node": "^17.0.35",
@@ -19,10 +21,14 @@
         "typescript": "^4.6.4"
     },
     "devDependencies": {
+        "@ffTsuzuku/configs": "github:ffTsuzuku/configs#v1.0.2",
+        "@ffTsuzuku/prettier-config": "github:ffTsuzuku/ffTsuzuku_prettier#v1.0.3",
         "@types/jest": "^27.5.1",
         "@typescript-eslint/eslint-plugin": "^5.26.0",
         "@typescript-eslint/parser": "^5.26.0",
         "eslint": "^8.16.0",
-        "eslint-config-google": "^0.14.0"
+        "eslint-config-google": "^0.14.0",
+        "install": "^0.13.0",
+        "npm": "^8.11.0"
     }
 }
