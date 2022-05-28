@@ -88,9 +88,14 @@ export default class Extractor {
                 const prevChar = text.charCodeAt(i - 1)
                 const char = text.charCodeAt(i)
 
-                if (char === atChar && (prevChar === spaceChar || i - 1 < 0)) {
+                //Char before @ can't be a valid handler character
+                //and may be the start of the tweet.
+                if (
+                    char === atChar &&
+                    (!validHandleChar(prevChar) || i - 1 < 0)
+                ) {
                     atIndex = i
-                } else if (char === spaceChar && atIndex !== -1) {
+                } else if (!validHandleChar(char) && atIndex !== -1) {
                     users.add(text.substring(atIndex, i))
                     atIndex = -1
                 } else if (
@@ -99,8 +104,6 @@ export default class Extractor {
                     atIndex !== -1
                 ) {
                     users.add(text.substring(atIndex, i + 1))
-                    atIndex = -1
-                } else if (!validHandleChar(char) && atIndex) {
                     atIndex = -1
                 }
             }

@@ -1,4 +1,5 @@
-import Tweet from "./Tweet"
+import Extractor from './Extract'
+import Tweet from './Tweet'
 /**
  * SocialNetwork provides methods that operate on a social network.
  * A social network is represented by a Map, where map[A] is the set of people
@@ -21,10 +22,17 @@ export default class SocialNetwork {
      * All the Twitter usernames in the returned social network must be either
      * authors or @-mentions in the list of tweets.
      */
-    static guessFollowsGraph(
-        tweets: Tweet[]
-    ): Map<string, Set<string>> {
-        throw Error('Implement me')
+    static guessFollowsGraph(tweets: Tweet[]): Map<string, Set<string>> {
+        const graph = new Map<string, Set<string>>()
+        for (const tweet of tweets) {
+            const { author } = tweet
+            const following = graph.get(author) ?? []
+            const mentions = Extractor.getMentionedUsers([tweet])
+            console.log('Tweet', tweet)
+
+            graph.set(author, new Set<string>([...mentions, ...following]))
+        }
+        return graph
     }
 
     /**
