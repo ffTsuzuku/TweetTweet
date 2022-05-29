@@ -43,6 +43,18 @@ export default class SocialNetwork {
      * descending order of follower count.
      */
     static influencers(followsGraph: Map<string, Set<string>>): string[] {
-        throw Error('Implement me')
+        const rankings: { name: string; followers: number }[] = []
+        const followCount = new Map<string, number>()
+        followsGraph.forEach((followList) => {
+            for (const user of followList) {
+                if (followCount.has(user)) {
+                    followCount.set(user, followCount.get(user) ?? 0 + 1)
+                    continue
+                }
+                followCount.set(user, 1)
+            }
+        })
+
+        const users = followCount.keys()
     }
 }
