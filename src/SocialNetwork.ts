@@ -28,7 +28,6 @@ export default class SocialNetwork {
             const { author } = tweet
             const following = graph.get(author) ?? []
             const mentions = Extractor.getMentionedUsers([tweet])
-            console.log('Tweet', tweet)
 
             graph.set(author, new Set<string>([...mentions, ...following]))
         }
@@ -45,16 +44,40 @@ export default class SocialNetwork {
     static influencers(followsGraph: Map<string, Set<string>>): string[] {
         const rankings: { name: string; followers: number }[] = []
         const followCount = new Map<string, number>()
+
         followsGraph.forEach((followList) => {
             for (const user of followList) {
-                if (followCount.has(user)) {
-                    followCount.set(user, followCount.get(user) ?? 0 + 1)
+                const name = user.replace('@', '')
+                if (followCount.has(name)) {
+                    followCount.set(name, (followCount.get(name) ?? 0) + 1)
                     continue
                 }
-                followCount.set(user, 1)
+                followCount.set(name, 1)
             }
         })
+        console.log('follow list', followCount)
 
-        const users = followCount.keys()
+        const usernameList = followCount.keys()
+        let username = usernameList.next()
+        while (!username.done) {
+            const userFollowerCount = followCount.get(username.value) ?? 0
+            rankings.forEach((ranking, i) => {
+                if (ranking.followers < userFollowerCount) {
+                    rankings.splice(i - 1, 0, {
+                        name: username.value,
+                        followers: userFollowerCount
+                    })
+                } else if (i === rankings.length - 1 || !rankings.length) {
+                    rankings.push({
+                        name: username.value,
+                        followers: userFollowerCount
+                    })
+                }
+            })
+            username = usernameList.next()
+        }
+
+        console.log('rankings', rankings)
+        return rankings.map((ranking) => ranking.name)
     }
 }
