@@ -55,29 +55,39 @@ export default class SocialNetwork {
                 followCount.set(name, 1)
             }
         })
-        console.log('follow list', followCount)
 
         const usernameList = followCount.keys()
         let username = usernameList.next()
         while (!username.done) {
             const userFollowerCount = followCount.get(username.value) ?? 0
-            rankings.forEach((ranking, i) => {
+            for (let i = 0; i < rankings.length; i++) {
+                const ranking = rankings[i]
                 if (ranking.followers < userFollowerCount) {
-                    rankings.splice(i - 1, 0, {
+                    rankings.splice(i, 0, {
                         name: username.value,
                         followers: userFollowerCount
                     })
-                } else if (i === rankings.length - 1 || !rankings.length) {
+
+                    break
+                } else if (i === rankings.length - 1) {
                     rankings.push({
                         name: username.value,
                         followers: userFollowerCount
                     })
+
+                    break
                 }
-            })
+            }
+
+            if (!rankings.length) {
+                rankings.push({
+                    name: username.value,
+                    followers: userFollowerCount
+                })
+            }
             username = usernameList.next()
         }
 
-        console.log('rankings', rankings)
         return rankings.map((ranking) => ranking.name)
     }
 }
