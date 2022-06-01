@@ -9,3 +9,5 @@ a language other than Java.
 Note this project includes a data set of tweets, which were fetched from the api
 endpoint used in the ps1 code, this is to ensure that if the endpoint is ever
 removed a backup set of tweets is available.
+
+A solution for this Problem Set can be found under the Solution branch.
