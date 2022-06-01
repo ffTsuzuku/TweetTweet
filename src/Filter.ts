@@ -17,10 +17,7 @@ export default class Filter {
      * @return all and only the tweets in the list whose author is username,
      * in the same order as in the input list.
      */
-    static writtenBy(
-        tweets: TweetInterface[],
-        username: string
-    ): TweetInterface[] {
+    static writtenBy(tweets: Tweet[], username: string): Tweet[] {
         throw Error('Implement me!')
     }
 
@@ -31,14 +28,11 @@ export default class Filter {
      * @return all and only the tweets in the list that were sent during the timespan,
      * in the same order as in the input list.
      */
-    static inTimespan(
-        tweets: TweetInterface[],
-        timespan: Timespan
-    ): TweetInterface[] {
+    static inTimespan(tweets: Tweet[], timespan: Timespan): Tweet[] {
         throw Error('Implement me!')
     }
 
-    static containing(tweets: Tweet[], words: string[]): TweetInterface[] {
+    static containing(tweets: Tweet[], words: string[]): Tweet[] {
         throw Error('Implement me!')
     }
 }
