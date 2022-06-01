@@ -18,7 +18,7 @@ export default class Filter {
      * in the same order as in the input list.
      */
     static writtenBy(tweets: Tweet[], username: string): Tweet[] {
-        throw Error('Implement me!')
+        return tweets.filter((tweet) => tweet.author === username)
     }
 
     /**
@@ -29,10 +29,23 @@ export default class Filter {
      * in the same order as in the input list.
      */
     static inTimespan(tweets: Tweet[], timespan: Timespan): Tweet[] {
-        throw Error('Implement me!')
+        const start = timespan.start.epochSeconds
+        const end = timespan.end.epochSeconds
+        return tweets.filter(
+            (tweet) =>
+                tweet.timestamp.epochSeconds >= start &&
+                tweet.timestamp.epochSeconds <= end
+        )
     }
 
     static containing(tweets: Tweet[], words: string[]): Tweet[] {
-        throw Error('Implement me!')
+        return tweets.filter((tweet) => {
+            for (const word of words) {
+                if (tweet.text.includes(word)) {
+                    return true
+                }
+            }
+            return false
+        })
     }
 }
