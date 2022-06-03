@@ -20,7 +20,7 @@
         "typescript": "^4.6.4"
     },
     "devDependencies": {
-        "@ffTsuzuku/configs": "github:ffTsuzuku/configs#v1.0.2",
+        "@ffTsuzuku/eslint-config": "github:ffTsuzuku/configs#v2.0.2",
         "@ffTsuzuku/prettier-config": "github:ffTsuzuku/ffTsuzuku_prettier#v1.0.3",
         "@types/jest": "^27.5.1",
         "@typescript-eslint/eslint-plugin": "^5.26.0",
