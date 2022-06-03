@@ -21,7 +21,7 @@ class Main {
     public static tweetAPI =
         'http://courses.csail.mit.edu/6.005/ps1_tweets/tweetPoll.py'
 
-    public static async main(args: String[]): Promise<void> {
+    public static async main(): Promise<void> {
         const tweets: Tweet[] = []
         // this logic replaces the entire TweetReader class to reduce bloat.
         try {
