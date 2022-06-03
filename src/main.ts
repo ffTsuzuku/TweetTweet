@@ -35,20 +35,24 @@ class Main {
                     created_at: timestamp
                 } = tweet
 
-                const [_, month, day, time, offset, year] = timestamp.split(' ')
+                const [, month, day, time, offset, year] = timestamp.split(' ')
                 const [hour, minute, second] = time.split(':')
 
+                const monthNum =
+                    new Date(Date.parse(month + '1, 2012')).getMonth() + 1
                 const instant = Temporal.ZonedDateTime.from({
                     year: Number(year),
                     day: Number(day),
-                    month: Number(month),
+                    month: monthNum,
                     hour: Number(hour),
                     minute: Number(minute),
                     second: Number(second),
                     timeZone: offset
                 }).toInstant()
+
                 return new Tweet(id, text, author, instant)
             })
+
             for (const tweet of data) {
                 tweets.push(tweet)
             }
@@ -56,6 +60,7 @@ class Main {
             console.error(e)
         }
 
+        console.log('tweets', tweets)
         console.log('Tweet example', tweets[0].toString())
         console.log(`Fetched ${tweets.length} tweets`)
 
@@ -79,4 +84,4 @@ class Main {
     }
 }
 
-Main.main([])
+Main.main()
